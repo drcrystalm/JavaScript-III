@@ -50,12 +50,19 @@ console.log(game1.destroy());
  */
 
 function CharacterStats(theGoods) {
-  this.healthPoints = healthPoints;
-  GameObject.prototype.destroy = function () {
-
-
-  }
+  this.createdAt = theGoods.createdAt;
+  this.name = theGoods.name;
+  this.dimensions = theGoods.dimensions;
+  this.healthPoints = theGoods.healthPoints;
+  GameObject.call(this, theGoods);
 }
+
+CharacterStats.prototype = Object.create(GameObject.prototype);
+
+CharacterStats.prototype.takeDamage = function () {
+  return `${this.name} took damage.`
+};
+
 
 
 
@@ -69,6 +76,28 @@ function CharacterStats(theGoods) {
   * should inherit destroy() from GameObject through CharacterStats
   * should inherit takeDamage() from CharacterStats
 */
+
+function Humanoid(humAttributes) {
+  this.team = humAttributes.team;
+  this.weapons = humAttributes.weapons;
+  this.language = humAttributes.language;
+  this.healthPoints = humAttributes.healthPoints;
+  this.team = humAttributes.team;
+  this.weapons = humAttributes.weapons;
+  this.language = humAttributes.language;
+}
+
+
+// Have Humanoid Inherit destroy and takeDamage prototype methods
+
+Humanoid.prototype = Object.create(CharacterStats.prototype);
+
+// Humanoid greet function
+
+Humanoid.prototype.greet = function () {
+  return `${this.name} offers a greeting in ${this.language}`
+};
+
 
 /*
  * Inheritance chain: GameObject -> CharacterStats -> Humanoid
